@@ -3,7 +3,7 @@ name: Internship Monitor
 on:
   schedule:
     # Runs every 3 minutes (UTC)
-    - cron: "*/3 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:  # allows manual trigger
 
 jobs:
