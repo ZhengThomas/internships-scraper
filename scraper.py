@@ -21,7 +21,7 @@ SEEN_LINKS_FILE = "seen_links.json"
 CHECK_INTERVAL = 180
 
 # IMPORTANT!!!!!!!!!!!!!!!!!!!!! discord webhook. if this get deprecated this app doesnt work
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1442790355257921648/WBHGrwcinTzwCl0yw6DJG5rtO-KkVgcMHGsTgVo08458NFdizK8HUomsTx4lR9VXv082"
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 
 class InternshipMonitor:
     def __init__(self):
