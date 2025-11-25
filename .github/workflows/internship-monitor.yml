@@ -2,8 +2,9 @@ name: Internship Monitor
 
 on:
   schedule:
-    - cron: "*/3 * * * *"   # every 3 minutes
-  workflow_dispatch:        # allow manual triggers
+    # Runs every 3 minutes (UTC)
+    - cron: "*/3 * * * *"
+  workflow_dispatch:  # allows manual trigger
 
 jobs:
   run-monitor:
@@ -12,6 +13,9 @@ jobs:
     steps:
     - name: Check out repo
       uses: actions/checkout@v4
+      with:
+        # Fetch full history to allow commits
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v5
@@ -23,7 +27,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests beautifulsoup4
 
-    - name: Run script
+    - name: Run scraper script
       env:
         DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
       run: |
@@ -35,5 +39,7 @@ jobs:
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Actions"
         git add seen_links.json
-        git commit -m "Update seen links" || echo "No changes"
-        git push
+        # Only commit if there are changes
+        git diff --cached --quiet || git commit -m "Update seen links"
+        # Push using GITHUB_TOKEN for authentication
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
