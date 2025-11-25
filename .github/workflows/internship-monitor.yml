@@ -16,6 +16,7 @@ jobs:
       with:
         # Fetch full history to allow commits
         fetch-depth: 0
+        persist-credentials: false
 
     - name: Set up Python
       uses: actions/setup-python@v5
