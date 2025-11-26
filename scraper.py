@@ -60,6 +60,7 @@ class InternshipMonitor:
         
         data = {
             "username": "Internship Monitor 🎓",
+            "content": "@everyone",
             "embeds": [embed]
         }
         
