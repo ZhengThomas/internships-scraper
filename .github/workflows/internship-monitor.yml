@@ -5,6 +5,8 @@ on:
     # Runs every 3 minutes (UTC)
     - cron: "*/5 * * * *"
   workflow_dispatch:  # allows manual trigger
+  repository_dispatch:
+    types: [run_scraper]
 
 jobs:
   run-monitor:
