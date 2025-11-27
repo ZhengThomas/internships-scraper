@@ -46,3 +46,13 @@ jobs:
         git diff --cached --quiet || git commit -m "Update seen links"
         # Push using GITHUB_TOKEN for authentication
         git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+    - name: Force keep-alive commit
+      run: |
+        echo "Last run: $(date -u)" > .keepalive
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add .keepalive seen_links.json
+        git commit -m "Keep-alive commit" || true
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        
