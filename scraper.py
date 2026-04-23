@@ -176,6 +176,14 @@ class InternshipMonitor:
             api_url = f"https://api.github.com/repos/{repo}/readme"
             headers = {"Accept": "application/vnd.github.v3.raw"}
             
+            # stuff below in this if statement lets you do the off season stuff
+            if "SimplifyJobs" in repo:
+                file_path = "README-Off-Season.md"
+                branch = "dev"
+                api_url = f"https://api.github.com/repos/{repo}/contents/{file_path}?ref={branch}"
+            else:
+                api_url = f"https://api.github.com/repos/{repo}/readme"
+            
             response = requests.get(api_url, headers=headers, timeout=10)
             
             if response.status_code == 200:
